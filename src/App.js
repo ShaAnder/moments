@@ -1,10 +1,10 @@
 import "./App.css";
-import Icon from "./components/Icon";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <div className="App">
-      <Icon name="house" size={32} color="blue" />
+      <NavBar />
     </div>
   );
 }
