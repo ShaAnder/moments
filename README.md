@@ -11,8 +11,9 @@ please be aware that the reusable icon component ONLY works with bootstrap icons
 
 ## Setup
 
-To setup this as part of a react project you can fork the repo or clone it locally
+To setup this as part of a react project you can fork the repo / use the template or clone it locally
 
+Use fork repo / use as template or to clone:
 ```
 git clone https://github.com/shaAnder/react-bootstrap-icons.git
 ```
