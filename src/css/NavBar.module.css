@@ -1,5 +1,20 @@
-.navLink {
+.NavBar {
+  background-color: #ffffff;
+  border: 1px solid #dadadf;
+}
+
+.NavLink {
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
+  color: black !important; /* Default color */
+  text-decoration: none !important;
+}
+
+.NavLink:hover {
+  color: rgb(49, 114, 255) !important;
+}
+
+.Active {
+  color: rgb(49, 114, 255) !important;
 }
