@@ -37,14 +37,6 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Submit the form
-    const formData = new FormData();
-    for (const key in signUpData) {
-      if (signUpData.hasOwnProperty(key)) {
-        formData.append(key, signUpData[key]);
-      }
-    }
-
     try {
       await axios.post("/dj-rest-auth/registration/", signUpData);
       setErrors({});
