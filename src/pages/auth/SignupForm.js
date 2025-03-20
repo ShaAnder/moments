@@ -45,13 +45,18 @@ const SignUpForm = () => {
       }
     }
 
-    console.log(formData);
     try {
-      await axios.post("/dj-rest-auth/registration/", formData);
+      await axios.post("/dj-rest-auth/registration/", signUpData);
+      setErrors({});
       navigate("/signin");
     } catch (err) {
-      setErrors(err.response?.data);
-      console.log(errors);
+      if (err.response && err.response.data) {
+        console.log("Error response:", err.response.data);
+        setErrors(err.response.data);
+      } else {
+        console.error("Unknown error:", err);
+        setErrors({ non_field_errors: ["An unknown error occurred."] });
+      }
     }
   };
 
@@ -73,11 +78,12 @@ const SignUpForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.username?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
+            {Array.isArray(errors.username) &&
+              errors.username.map((message, idx) => (
+                <Alert key={idx} variant="warning">
+                  {message}
+                </Alert>
+              ))}
             <Form.Group controlId="password1">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
@@ -89,16 +95,12 @@ const SignUpForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.password1?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
-                {message}
-              </Alert>
-            ))}
-            {errors.password2?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
-                {message}
-              </Alert>
-            ))}
+            {Array.isArray(errors.password1) &&
+              errors.password1.map((message, idx) => (
+                <Alert key={idx} variant="warning">
+                  {message}
+                </Alert>
+              ))}
             <Form.Group controlId="password2">
               <Form.Label className="d-none">Confirm password</Form.Label>
               <Form.Control
@@ -110,17 +112,24 @@ const SignUpForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+            {Array.isArray(errors.password2) &&
+              errors.password2.map((message, idx) => (
+                <Alert key={idx} variant="warning">
+                  {message}
+                </Alert>
+              ))}
             <Button
               className={`${btnCss.Button} ${btnCss.Wide} ${btnCss.Bright}`}
               type="submit"
             >
               Sign up
             </Button>
-            {errors.non_field_errors?.map((message, idx) => (
-              <Alert key={idx} variant="warning" className="mt-3">
-                {message}
-              </Alert>
-            ))}
+            {Array.isArray(errors.non_field_errors) &&
+              errors.non_field_errors.map((message, idx) => (
+                <Alert key={idx} variant="warning">
+                  {message}
+                </Alert>
+              ))}
           </Form>
         </Container>
 
