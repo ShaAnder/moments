@@ -1,10 +1,16 @@
+/// IMPORTS ///
+
+// data / imports
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
+// css
 import css from "../../css/SignInUpForm.module.css";
 import btnCss from "../../css/Button.module.css";
 import appCss from "../../App.module.css";
 
+// react bootstrap components
 import {
   Form,
   Button,
@@ -14,20 +20,32 @@ import {
   Container,
   Alert,
 } from "react-bootstrap";
-import axios from "axios";
 
+// SignUp Form Component
 const SignUpForm = () => {
+  // Get our user registration state
   const [signUpData, setSignUpData] = useState({
     username: "",
     password1: "",
     password2: "",
   });
+
+  // destructure for easy use
   const { username, password1, password2 } = signUpData;
+
+  // set error state
   const [errors, setErrors] = useState({});
 
+  // set navigator
   const navigate = useNavigate();
 
+  // handle changes in form fields
   const handleChange = (event) => {
+    /*
+    Handler function to handle changes in the form and set our signup state
+    takes existing state and adds to it, allowing state to be 
+    
+    */
     setSignUpData({
       ...signUpData,
       [event.target.name]: event.target.value,

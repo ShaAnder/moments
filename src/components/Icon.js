@@ -1,15 +1,18 @@
-import React from 'react';
+/// IMPORTS ///
 
-const Icon = ({ name, size = 24, color = 'currentColor', className = '' }) => {
-    if (!name) return null;
+import React from "react";
 
-    return (
-        <i
-            className={`bi bi-${name} ${className}`}
-            style={{ fontSize: size, color }}
-            aria-hidden="true"
-        ></i>
-    );
+// Icon component for bootstrap svgs, a;;pws the user to set base sizing / color and a custom className
+const Icon = ({ name, size = 24, color = "currentColor", className = "" }) => {
+  if (!name) return null;
+
+  return (
+    <i
+      className={`bi bi-${name} ${className}`}
+      style={{ fontSize: size, color }}
+      aria-hidden="true"
+    ></i>
+  );
 };
 
 export default Icon;
