@@ -1,9 +1,10 @@
 /// IMPORTS ///
 
-// data / imports
-import React, { useContext, useState } from "react";
+// Data / Api / Hooks / Context
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSetCurrentUser } from "../../contexts/currentUserContexts";
 
 // css
 import css from "../../css/SignInUpForm.module.css";
@@ -20,12 +21,11 @@ import {
   Container,
   Alert,
 } from "react-bootstrap";
-import { SetCurrentUserContext } from "../../App";
 
 // Function
 function SignInForm() {
   // get our user context at the top of the component
-  const setCurrentUser = useContext(SetCurrentUserContext);
+  const setCurrentUser = useSetCurrentUser();
 
   // get our user being signed in state here
   const [signInData, setSignInData] = useState({

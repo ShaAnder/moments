@@ -1,9 +1,9 @@
 /// IMPORTS ///
 
-// Data / Hooks
-import React, { useContext } from "react";
+// Data / Api / Hooks / Context
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { CurrentUserContext } from "../App";
+import { useCurrentUser } from "../contexts/currentUserContexts";
 
 // Media / CSS
 import css from "../css/NavBar.module.css";
@@ -16,7 +16,7 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 // NavBar component
 const NavBar = () => {
   // set our current user context
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useCurrentUser();
 
   //use location hook, from react router to allow navigating
   const location = useLocation();
