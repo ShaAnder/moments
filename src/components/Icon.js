@@ -9,7 +9,7 @@ const Icon = ({ name, size = 24, color = "currentColor", className = "" }) => {
   return (
     <i
       className={`bi bi-${name} ${className}`}
-      style={{ fontSize: size, color }}
+      style={{ fontSize: size, color, margin: 0 }}
       aria-hidden="true"
     ></i>
   );

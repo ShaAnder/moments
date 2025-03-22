@@ -46,6 +46,7 @@ const NavBar = () => {
       }`}
     >
       <Icon name="plus-square" size={24} />
+      New Post
     </Nav.Link>
   );
 
@@ -59,7 +60,7 @@ const NavBar = () => {
           location.pathname === "/feed" ? css.Active : ""
         }`}
       >
-        <Icon name="broadcast" size={24} />
+        <Icon name="broadcast" size={24} /> Feed
       </Nav.Link>
       <Nav.Link
         as={Link}
@@ -68,7 +69,7 @@ const NavBar = () => {
           location.pathname === "/liked" ? css.Active : ""
         }`}
       >
-        <Icon name="heart" size={24} />
+        <Icon name="heart" size={24} /> Likes
       </Nav.Link>
       <Nav.Link
         as={Link}
@@ -76,22 +77,14 @@ const NavBar = () => {
         onClick={handleSignOut}
         className={`${css.NavLink} ${location.pathname === "/"}`}
       >
-        <Icon name="box-arrow-in-left" size={24} />
+        <Icon name="box-arrow-in-left" size={24} /> Sign Out
       </Nav.Link>
       <Nav.Link
         as={Link}
         to={`/profiles/${currentUser?.profile_id}`}
-        className={`${css.NavLink} ${
-          location.pathname === `/profiles/${currentUser?.profile_id}`
-            ? css.Active
-            : ""
-        }`}
+        className={`${css.NavLink} ${location.pathname === "/posts/create"}`}
       >
-        <Avatar
-          src={currentUser?.profile_image}
-          text={`${currentUser?.username}'s Avatar`}
-          height={40}
-        />
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </Nav.Link>
     </>
   );
@@ -116,8 +109,7 @@ const NavBar = () => {
           location.pathname === "/signup" ? css.Active : ""
         }`}
       >
-        <Icon name="person-add" size={24} />
-        <span>Signup</span>
+        <Icon name="person-add" size={24} /> Sign Up
       </Nav.Link>
     </>
   );
