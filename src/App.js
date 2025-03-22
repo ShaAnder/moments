@@ -8,8 +8,8 @@ import "./api/axiosDefault";
 //components
 import css from "./App.module.css";
 import NavBar from "./components/NavBar";
-import SignUpForm from "./pages/auth/SignUpForm";
-import SignInForm from "./pages/auth/SignInForm";
+import SignUpForm from "./pages/auth/SignUpForm.js";
+import SignInForm from "./pages/auth/SignInForm.js";
 
 function App() {
   // Our rendered components
