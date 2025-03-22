@@ -18,11 +18,17 @@ import Icon from "./Icon";
 import Avatar from "./Avatar";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
+// hooks
+import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+
 // NavBar component
 const NavBar = () => {
   // set our current user context
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+
+  // hook for clicking collapsing our dom items (navbar toggle)
+  const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
   //use location hook, from react router to allow navigating
   const location = useLocation();
@@ -115,7 +121,7 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar className={css.NavBar} expand="md" fixed="top">
+    <Navbar expanded={expanded} className={css.NavBar} expand="md" fixed="top">
       <Container>
         <Nav.Link
           as={Link}
@@ -129,7 +135,11 @@ const NavBar = () => {
           </Navbar.Brand>
         </Nav.Link>
         {currentUser && addPostIcon}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          ref={ref}
+          onClick={() => setExpanded((prev) => !prev)}
+          aria-controls="basic-navbar-nav"
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link
