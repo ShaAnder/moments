@@ -55,6 +55,7 @@ function SignInForm() {
       navigate("/");
     } catch (err) {
       setErrors(err.response?.data);
+      console.log("Test");
     }
   };
 
