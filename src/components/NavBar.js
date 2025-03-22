@@ -87,8 +87,11 @@ const NavBar = () => {
             : ""
         }`}
       >
-        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
-        {console.log(currentUser?.profile_image)}
+        <Avatar
+          src={currentUser?.profile_image}
+          text={`${currentUser?.username}'s Avatar`}
+          height={40}
+        />
       </Nav.Link>
     </>
   );
