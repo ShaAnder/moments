@@ -1,0 +1,13 @@
+.Container {
+  min-height: 343px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Add image hover effect */
+.Image:hover {
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}

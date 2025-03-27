@@ -61,10 +61,8 @@ const SignUpForm = () => {
       navigate("/signin");
     } catch (err) {
       if (err.response && err.response.data) {
-        console.log("Error response:", err.response.data);
         setErrors(err.response.data);
       } else {
-        console.error("Unknown error:", err);
         setErrors({ non_field_errors: ["An unknown error occurred."] });
       }
     }

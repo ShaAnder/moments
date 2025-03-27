@@ -50,12 +50,12 @@ function SignInForm() {
     try {
       // we save the data from the api and set it as current user
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-      console.log(data);
       setCurrentUser(data.user);
       navigate("/");
     } catch (err) {
       setErrors(err.response?.data);
-      console.log("Test");
+    } finally {
+      navigate("/");
     }
   };
 

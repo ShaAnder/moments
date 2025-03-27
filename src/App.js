@@ -10,6 +10,8 @@ import css from "./App.module.css";
 import NavBar from "./components/NavBar";
 import SignInForm from "./pages/auth/SignInForm";
 import SignUpForm from "./pages/auth/SignUpForm";
+import PostCreateForm from "./pages/posts/postCreateForm";
+import PostPage from "./pages/posts/PostPage";
 
 function App() {
   // Our rendered components
@@ -21,6 +23,8 @@ function App() {
           <Route path="/" element={<h1>Home Page</h1>} />
           <Route path="/signin" element={<SignInForm />} />
           <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/posts/create" element={<PostCreateForm />} />
+          <Route path="/posts/:id?" element={<PostPage />}></Route>
           {/* Catch page not found */}
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>
