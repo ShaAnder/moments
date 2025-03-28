@@ -23,16 +23,17 @@ import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 
 // NavBar component
 const NavBar = () => {
-  // set our current user context
+  // get our user context
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
-  // hook for clicking collapsing our dom items (navbar toggle)
+  // handle navbar toggle when clicking outside
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
-  //use location hook, from react router to allow navigating
+  // get the current location to highlight active nav items
   const location = useLocation();
 
+  // sign the user out
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
@@ -42,7 +43,7 @@ const NavBar = () => {
     }
   };
 
-  // icons for the posts
+  // Add post link if user is logged in
   const addPostIcon = (
     <Nav.Link
       as={Link}
@@ -56,7 +57,7 @@ const NavBar = () => {
     </Nav.Link>
   );
 
-  // if user is logged in let's greet them
+  // Logged-in user specific nav items
   const loggedInIcons = (
     <>
       <Nav.Link
@@ -95,7 +96,7 @@ const NavBar = () => {
     </>
   );
 
-  // signup / signin should only be available if the user is logged out
+  // If logged out, show sign-in / sign-up options
   const loggedOutIcons = (
     <>
       <Nav.Link

@@ -1,4 +1,16 @@
+/// IMPORTS ///
+
+// Data / API / Hooks / Context
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { axiosReq } from "../../api/axiosDefault";
+
+// Media / CSS
+import css from "../../css/PostCreateEditForm.module.css";
+import appCss from "../../App.module.css";
+import btnCss from "../../css/Button.module.css";
+
+// Components
 import {
   Form,
   Button,
@@ -8,13 +20,10 @@ import {
   Alert,
   Image,
 } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import Asset from "../../components/Asset";
+
+// Media
 import Upload from "../../assets/upload.png";
-import css from "../../css/PostCreateEditForm.module.css";
-import appCss from "../../App.module.css";
-import btnCss from "../../css/Button.module.css";
-import { axiosReq } from "../../api/axiosDefault";
 
 function PostCreateForm() {
   const navigate = useNavigate();

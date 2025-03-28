@@ -1,44 +1,39 @@
+/// IMPORTS ///
+
+// Data / API / Hooks / Context
 import React, { useEffect, useState } from "react";
-
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-
-import appCss from "../../App.module.css";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefault";
 
+// Media / CSS
+import appCss from "../../App.module.css";
+
+// Components
+import { Col, Row, Container } from "react-bootstrap";
 import Post from "./Post";
 
 function PostPage() {
-  // Extract the 'id' parameter from the URL
+  // Get the 'id' parameter from the URL
   const { id } = useParams();
 
-  // State to store the post data, initialized with an empty results array
+  // State to store post data, even if we get 1 or many posts
   const [post, setPost] = useState({ results: [] });
 
   useEffect(() => {
-    // useEffect runs this function when the component mounts or when `id` changes
+    // Fetch post data when the component loads or 'id' changes
     const handleMount = async () => {
-      // Defines an async function to fetch post data when the component loads
       try {
-        // Sends a request to fetch post data and extracts only the `data` field from the response
+        // Get the post data using the 'id' and set the state
         const [{ data: post }] = await Promise.all([
-          // Makes a GET request to retrieve the post with the specific `id` from the API
           axiosReq.get(`/posts/${id}`),
         ]);
-        // Updates the `post` state with the fetched post, wrapping it in a `results` array
         setPost({ results: [post] });
-        // Logs the fetched post data to the console for debugging
-        console.log(post);
       } catch (err) {
-        // Catches and logs any errors if the API request fails
         console.log(err);
       }
     };
-    // Calls the `handleMount` function immediately when the component mounts or `id` changes
     handleMount();
-  }, [id]); // Re-runs this effect whenever `id` changes
+  }, [id]); // Rerun this effect if the 'id' changes
 
   return (
     <Row className="h-100">

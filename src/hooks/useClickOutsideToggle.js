@@ -1,3 +1,6 @@
+/// IMPORTS ///
+
+// Data / API / Hooks / Context
 import { useEffect, useRef, useState } from "react";
 
 const useClickOutsideToggle = () => {

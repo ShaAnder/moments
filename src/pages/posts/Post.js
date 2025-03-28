@@ -1,16 +1,21 @@
-// Import the React library which is necessary to define React components.
-import React from "react";
-import css from "../../css/Post.module.css";
+/// IMPORTS ///
+
+// Data / API / Hooks / Context
+import React, { useState } from "react";
 import { useCurrentUser } from "../../contexts/currentUserContexts";
+import { axiosRes } from "../../api/axiosDefault";
+
+// Media / CSS
+import css from "../../css/Post.module.css";
+
+// Components
 import { Card, OverlayTrigger, Tooltip, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-
 import Icon from "../../components/Icon";
 
-// Define the Post component as a functional component that accepts props.
 const Post = (props) => {
-  // Destructure the props object to extract individual properties for easier use.
+  // Destructure props for easy access
   const {
     id,
     owner,
@@ -22,21 +27,52 @@ const Post = (props) => {
     image_url,
     updated_at,
     postPage,
+    setPosts,
   } = props;
 
-  // Use the custom hook to get the current user object.
+  // Get current user and location
   const currentUser = useCurrentUser();
-
-  //use location hook, from react router to allow navigating
   const location = useLocation();
-
-  // Determine if the current user is the owner of the post.
   const is_owner = currentUser?.username === owner;
+
+  // handle liking posts
+  const handleLike = async () => {
+    try {
+      const { data } = await axiosRes.post("/likes/", { post: id });
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // handle unliking posts
+  const handleUnlike = async () => {
+    try {
+      await axiosRes.delete(`/likes/${like_id}/`);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Card className={css.Post}>
       <Card.Body>
-        {/* Replacing Media with Bootstrap's flex utilities */}
+        {/* Post header with profile avatar and timestamp */}
         <div className="d-flex align-items-center justify-content-between">
           <Nav.Link
             as={Link}
@@ -56,40 +92,53 @@ const Post = (props) => {
         </div>
       </Card.Body>
 
+      {/* Post image with link to full post */}
       <Link to={`/posts/${id}`}>
         <Card.Img src={image_url} alt={title} />
       </Link>
 
       <Card.Body>
+        {/* Post title and content */}
         {title && <Card.Title className="text-left">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
 
+        {/* Post actions: Like, comment, and tooltip interactions */}
         <div className={css.PostBar}>
           {is_owner ? (
+            // Show tooltip when trying to like own post
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>You can't like your own post!</Tooltip>}
             >
-              <Icon name="heart" />
+              <span>
+                <Icon name="heart" />
+              </span>
             </OverlayTrigger>
           ) : like_id ? (
-            <span onClick={() => {}}>
-              <Icon name="heart" className={css.Heart} />
+            // Show filled heart icon if post is liked
+            <span onClick={handleUnlike}>
+              <Icon name="heart-fill" className={css.Heart} />
             </span>
           ) : currentUser ? (
-            <span onClick={() => {}}>
+            // Show outlined heart if post is not liked
+            <span onClick={handleLike}>
               <Icon name="heart" className={css.HeartOutline} />
             </span>
           ) : (
+            // Show tooltip when not logged in
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>Log in to like posts!</Tooltip>}
             >
-              <Icon name="heart" />
+              <span>
+                <Icon name="heart" />
+              </span>
             </OverlayTrigger>
           )}
+          {/* Display like count */}
           {likes_count}
 
+          {/* Link to post comments */}
           <Link to={`/posts/${id}`}>
             <Icon name="chat-left" />
           </Link>

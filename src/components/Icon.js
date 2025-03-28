@@ -1,15 +1,19 @@
 /// IMPORTS ///
 
+// Data / API / Hooks / Context
 import React from "react";
 
-// Icon component for bootstrap svgs, a;;pws the user to set base sizing / color and a custom className
-const Icon = ({ name, size = 24, color = "currentColor", className = "" }) => {
+// Icon component for Bootstrap SVG icons with customizable size, color, and class
+const Icon = ({ name, size = 24, className = "" }) => {
+  // Don't render anything if 'name' isn't provided
   if (!name) return null;
 
   return (
     <i
+      // Combine Bootstrap icon class with any custom class
       className={`bi bi-${name} ${className}`}
-      style={{ fontSize: size, color, margin: 0 }}
+      // Apply size, color, and remove margin
+      style={{ fontSize: `${size}px`, margin: 0 }}
       aria-hidden="true"
     ></i>
   );

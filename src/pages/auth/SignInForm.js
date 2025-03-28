@@ -1,12 +1,12 @@
 /// IMPORTS ///
 
-// Data / Api / Hooks / Context
+// Data / API / Hooks / Context
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/currentUserContexts";
 
-// css
+// Media / CSS
 import css from "../../css/SignInUpForm.module.css";
 import btnCss from "../../css/Button.module.css";
 import appCss from "../../App.module.css";

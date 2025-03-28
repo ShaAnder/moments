@@ -1,8 +1,6 @@
-/**
- * Context file for setting the current user
- */
-
 /// IMPORTS ///
+
+// Data / API / Hooks / Context
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { axiosRes, axiosReq } from "../api/axiosDefault";
@@ -10,115 +8,92 @@ import { useNavigate } from "react-router-dom";
 
 /// CONTEXT ///
 
-// user context, so we avoid passing it down every level
+// user context for accessing current user globally
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 
-// custome context hook exports
+// custom hooks to use current user and setter
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
 export const CurrentUserProvider = ({ children }) => {
-  // we want to get the currently logged in user for validation
+  // state for storing the current user
   const [currentUser, setCurrentUser] = useState(null);
 
-  // navigate to redirect as needed
+  // navigate hook to handle redirection
   const navigate = useNavigate();
 
-  // request to our api to retrieve logged in user
+  // fetch current user data on mount
   const handleMount = async () => {
     try {
       const { data } = await axios.get("/dj-rest-auth/user/");
       setCurrentUser(data);
     } catch (err) {
-      if (err.response?.status === 401) {
-        return;
-      } else {
-        console.error(err);
-      }
+      if (err.response?.status === 401) return; // no user logged in
+      console.error(err);
     }
   };
 
-  // Use effect to call our mount
+  // fetch user data on component mount
   useEffect(() => {
     handleMount();
   }, []);
 
-  // useMemo hook to attach our interceptors
+  // setup interceptors for token refresh
   useMemo(() => {
-    // setup our interceptor configured to
+    // request interceptor to refresh token before making requests
     axiosReq.interceptors.request.use(
       async (config) => {
-        // try refresh the token
         try {
           await axios.post("/dj-rest-auth/token/refresh/");
-          // unless there's an error
         } catch (err) {
-          // in which case, the logged in user is redirected to signin
-          setCurrentUser((prevCurrentUser) => {
-            if (prevCurrentUser) {
-              navigate("/signin");
-            }
-            // and set the data to null (aka no data log in again)
-            return null;
-          });
-          // return our config
-          return config;
+          // if token refresh fails, log user out and redirect
+          setCurrentUser(null);
+          navigate("/signin");
         }
         return config;
       },
-      // return rejected promise
-      (err) => {
-        return Promise.reject(err);
-      }
+      (err) => Promise.reject(err)
     );
 
+    // response interceptor to refresh token if response is 401
     axiosRes.interceptors.response.use(
       (response) => response,
       async (err) => {
-        // check to see if the error is 401
         if (err.response?.status === 401) {
-          // try refresh the token
           try {
             await axios.post("/dj-rest-auth/token/refresh/");
-            // unless there's an error
           } catch (err) {
-            // in which case, the logged in user is redirected to signin
-            setCurrentUser((prevCurrentUser) => {
-              if (prevCurrentUser) {
-                navigate("/signin");
-              }
-              // and set the data to null (aka no data log in again)
-              return null;
-            });
+            // if refresh fails, log user out
+            setCurrentUser(null);
+            navigate("/signin");
           }
-          // return the error config to exit the interceptor
           return axios(err.config);
         }
-        // if error not 401 reject the promise with the error
         return Promise.reject(err);
       }
     );
   }, [navigate]);
 
-  // Proactive refresh using a "ping" approach that doesn't require token decoding.
+  // proactive token refresh to keep session alive
   useEffect(() => {
     const interval = setInterval(
       async () => {
-        console.log("Pinging refresh endpoint to keep session alive...");
+        console.log("Pinging refresh endpoint...");
         try {
           await axios.post("/dj-rest-auth/token/refresh/");
           console.log("Token refreshed via ping");
         } catch (err) {
-          console.error("Error refreshing token via ping:", err);
+          console.error("Error refreshing token:", err);
           setCurrentUser(null);
           navigate("/signin");
         }
       },
       4 * 60 * 1000
     ); // every 4 minutes
-    return () => clearInterval(interval);
-  }, [navigate, setCurrentUser]);
+
+    return () => clearInterval(interval); // clean up on unmount
+  }, [navigate]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
