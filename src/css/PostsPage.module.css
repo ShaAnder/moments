@@ -1,15 +1,16 @@
 .SearchBar input {
   border-radius: 20px;
   color: #242a3d;
-  padding-left: 40px;
+  padding-left: 50px;
   margin-bottom: 16px;
 }
 
 .SearchIcon {
   position: absolute;
   font-size: 1.2rem;
-  padding: 9px;
+  padding-top: 3px;
   padding-left: 15px;
+  padding-right: 10px;
 }
 
 .SearchIcon:hover {
