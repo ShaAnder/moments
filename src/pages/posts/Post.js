@@ -79,11 +79,7 @@ const Post = (props) => {
             to={`/profiles/${currentUser?.profile_id}`}
             className={`${css.NavLink} ${location.pathname === "/posts/create"}`}
           >
-            <Avatar
-              src={currentUser?.profile_image}
-              text={currentUser?.username}
-              height={40}
-            />
+            <Avatar src={currentUser?.profile_image} text={owner} height={40} />
           </Nav.Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
