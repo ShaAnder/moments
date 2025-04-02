@@ -15,7 +15,6 @@
   border: 1px solid #dadadf;
   display: flex;
   flex-direction: column; /* Align children (image and button) vertically */
-  align-items: center; /* Center the button and image horizontally */
 }
 
 .ImageWrapper {

@@ -6,12 +6,14 @@
 
 .Button {
   border: none;
+  position: relative;
   background-color: #242a3d;
   color: aliceblue;
   border-radius: 100px;
   padding: 4px 10px;
   min-width: 75px;
-  margin: 5px;
+  margin: auto;
+  left: 40%;
 }
 
 .Button:hover {
