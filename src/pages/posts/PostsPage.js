@@ -21,7 +21,7 @@ import Icon from "../../components/Icon";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 // utils
-import fetchMoreData from "../../utils/utils";
+import { fetchMoreData } from "../../utils/utils";
 
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });

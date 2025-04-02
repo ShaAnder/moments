@@ -13,6 +13,7 @@ import { Card, OverlayTrigger, Tooltip, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import Icon from "../../components/Icon";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Post = (props) => {
   // Destructure props for easy access
@@ -83,7 +84,7 @@ const Post = (props) => {
           </Nav.Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && postPage && <span className="ms-2">...</span>}
+            {is_owner && postPage && <MoreDropdown />}
           </div>
         </div>
       </Card.Body>
