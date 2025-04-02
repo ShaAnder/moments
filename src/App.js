@@ -14,6 +14,7 @@ import PostCreateForm from "./pages/posts/postCreateForm";
 import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/currentUserContexts";
+import PostEditForm from "./pages/posts/PostEditForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -52,6 +53,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/posts/create" element={<PostCreateForm />} />
           <Route path="/posts/:id?" element={<PostPage />}></Route>
+          <Route path="/posts/:id/edit" element={<PostEditForm />} />
           {/* Catch page not found */}
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>

@@ -1,9 +1,10 @@
 /// IMPORTS ///
 
 // Data / API / Hooks / Context
-import React, { useState } from "react";
+import React from "react";
 import { useCurrentUser } from "../../contexts/currentUserContexts";
 import { axiosRes } from "../../api/axiosDefault";
+import { useNavigate } from "react-router-dom";
 
 // Media / CSS
 import css from "../../css/Post.module.css";
@@ -35,6 +36,21 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const location = useLocation();
   const is_owner = currentUser?.username === owner;
+
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate(`/posts/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/posts/${id}/`);
+      navigate(-1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // handle liking posts
   const handleLike = async () => {
@@ -84,7 +100,12 @@ const Post = (props) => {
           </Nav.Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && postPage && <MoreDropdown />}
+            {is_owner && postPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </div>
       </Card.Body>
