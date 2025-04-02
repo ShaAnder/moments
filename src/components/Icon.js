@@ -3,20 +3,19 @@
 // Data / API / Hooks / Context
 import React from "react";
 
-// Icon component for Bootstrap SVG icons with customizable size, color, and class
-const Icon = ({ name, size = 24, className = "" }) => {
-  // Don't render anything if 'name' isn't provided
+// Use React.forwardRef to allow passing a ref to the underlying <i> tag
+const Icon = React.forwardRef(({ name, size = 24, className = "" }, ref) => {
+  // If no icon name, return null
   if (!name) return null;
 
   return (
     <i
-      // Combine Bootstrap icon class with any custom class
-      className={`bi bi-${name} ${className}`}
-      // Apply size, color, and remove margin
-      style={{ fontSize: `${size}px`, margin: 0 }}
-      aria-hidden="true"
+      ref={ref} // Forward the ref to the <i> element
+      className={`bi bi-${name} ${className}`} // Apply Bootstrap icon class
+      style={{ fontSize: `${size}px`, margin: 0 }} // Control icon size dynamically
+      aria-hidden="true" // Ensures the icon is ignored by screen readers
     ></i>
   );
-};
+});
 
 export default Icon;
