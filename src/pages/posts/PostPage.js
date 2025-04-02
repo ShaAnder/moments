@@ -13,6 +13,7 @@ import appCss from "../../App.module.css";
 import { Col, Row, Container } from "react-bootstrap";
 import Post from "./Post";
 import CommentCreateForm from "../comment/commentCreateForm";
+import Comment from "../comment/comment";
 
 function PostPage() {
   // Get the 'id' parameter from the URL
@@ -36,6 +37,7 @@ function PostPage() {
         ]);
         setPost({ results: [post] });
         setComments(comments);
+        console.log(comments);
       } catch (err) {
         console.log(err);
       }
@@ -62,9 +64,11 @@ function PostPage() {
           ) : null}
           {comments.results.length ? (
             comments.results.map((comment) => (
-              <p key={comment.id}>
-                {comment.owner}: {comment.content}
-              </p>
+              <Comment
+                key={comment.id}
+                {...comment}
+                profile_image={profile_image}
+              />
             ))
           ) : currentUser ? (
             <span>No comments yet, be the first to comment</span>
