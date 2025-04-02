@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefault";
+import { useCurrentUser } from "../../contexts/currentUserContexts";
 
 // Media / CSS
 import appCss from "../../App.module.css";
@@ -11,6 +12,7 @@ import appCss from "../../App.module.css";
 // Components
 import { Col, Row, Container } from "react-bootstrap";
 import Post from "./Post";
+import CommentCreateForm from "../comment/commentCreateForm";
 
 function PostPage() {
   // Get the 'id' parameter from the URL
@@ -18,6 +20,10 @@ function PostPage() {
 
   // State to store post data, even if we get 1 or many posts
   const [post, setPost] = useState({ results: [] });
+
+  const currentUser = useCurrentUser();
+  const profile_image = currentUser?.profile_image;
+  const [comments, setComments] = useState({ results: [] });
 
   useEffect(() => {
     // Fetch post data when the component loads or 'id' changes
@@ -40,7 +46,19 @@ function PostPage() {
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <p>Popular profiles for mobile</p>
         <Post {...post.results[0]} setPosts={setPost} postPage />
-        <Container className={appCss.Content}>Comments</Container>
+        <Container className={appCss.Content}>
+          {currentUser ? (
+            <CommentCreateForm
+              profile_id={currentUser.profile_id}
+              profileImage={profile_image}
+              post={id}
+              setPost={setPost}
+              setComments={setComments}
+            />
+          ) : comments.results.length ? (
+            "Comments"
+          ) : null}
+        </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
         Popular profiles for desktop
