@@ -24,11 +24,8 @@ import Asset from "../../components/Asset";
 
 // Media
 import Upload from "../../assets/upload.png";
-import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
-  useRedirect("loggedOut");
-
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null);

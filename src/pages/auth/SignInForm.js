@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/currentUserContexts";
-import { useRedirect } from "../../hooks/useRedirect";
 
 // Media / CSS
 import css from "../../css/SignInUpForm.module.css";
@@ -27,7 +26,6 @@ import {
 function SignInForm() {
   // get our user context at the top of the component
   const setCurrentUser = useSetCurrentUser();
-  useRedirect("loggedIn");
 
   // get our user being signed in state here
   const [signInData, setSignInData] = useState({
