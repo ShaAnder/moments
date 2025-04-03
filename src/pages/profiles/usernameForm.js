@@ -8,11 +8,11 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
+import { axiosRes } from "../../api/axiosDefault";
 import {
   useCurrentUser,
   useSetCurrentUser,
-} from "../../contexts/CurrentUserContext";
+} from "../../contexts/currentUserContexts";
 
 import btnCss from "../../css/Button.module.css";
 import appCss from "../../App.module.css";

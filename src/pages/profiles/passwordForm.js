@@ -8,8 +8,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { axiosRes } from "../../api/axiosDefault";
+import { useCurrentUser } from "../../contexts/currentUserContexts";
 
 import btnCss from "../../css/Button.module.css";
 import appCss from "../../App.module.css";

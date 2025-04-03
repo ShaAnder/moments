@@ -9,11 +9,11 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 
-import { axiosReq } from "../../api/axiosDefaults";
+import { axiosReq } from "../../api/axiosDefault";
 import {
   useCurrentUser,
   useSetCurrentUser,
-} from "../../contexts/CurrentUserContext";
+} from "../../contexts/currentUserContexts";
 
 import btnCss from "../../css/Button.module.css";
 import appCss from "../../App.module.css";
