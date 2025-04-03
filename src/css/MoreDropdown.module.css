@@ -1,25 +1,27 @@
-.DropdownItem {
-  display: flex;
-  flex-direction: row; /* Align items horizontally */
-  justify-content: flex-start; /* Align items to the left */
-  align-items: center; /* Vertically align items */
-  padding: 8px 16px; /* Add padding */
-  width: auto; /* Allow width to adjust based on content */
-}
-
-.DropdownItem i {
-  margin-right: 8px; /* Space between icon and text */
-}
-
-.dropdown-menu {
+/* Horizontal dropdown menu */
+.DropdownMenu {
   display: flex !important;
   flex-direction: row !important;
   padding: 0 !important;
-  width: auto !important;
+  min-width: auto !important; /* Override Bootstrap's min-width */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important; /* Optional: Add subtle shadow */
 }
 
-.Absolute {
-  position: absolute;
-  right: 0;
-  z-index: 99;
+/* Dropdown items (side by side) */
+.DropdownItem {
+  display: inline-flex !important;
+  align-items: center;
+  padding: 8px 12px !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* Hover effect (optional) */
+.DropdownItem:hover {
+  background-color: #f8f9fa !important;
+}
+
+/* Remove default dropdown item spacing */
+.DropdownItem:not(:last-child) {
+  border-right: 1px solid #eee !important; /* Optional: Add divider */
 }

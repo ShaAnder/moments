@@ -14,6 +14,9 @@ import { Col, Row, Container } from "react-bootstrap";
 import Post from "./Post";
 import CommentCreateForm from "../comment/commentCreateForm";
 import Comment from "../comment/comment";
+import Asset from "../../components/Asset";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
 
 function PostPage() {
   // Get the 'id' parameter from the URL
@@ -63,15 +66,23 @@ function PostPage() {
             "Comments"
           ) : null}
           {comments.results.length ? (
-            comments.results.map((comment) => (
-              <Comment
-                key={comment.id}
-                {...comment}
-                profile_image={profile_image}
-              />
-            ))
+            <InfiniteScroll
+              children={comments.results.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  setPost={setPost}
+                  setComments={setComments}
+                  profile_image={profile_image}
+                />
+              ))}
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
+            />
           ) : currentUser ? (
-            <span>No comments yet, be the first to comment</span>
+            <span>No comments yet, be the first to comment!</span>
           ) : (
             <span>No comments... yet</span>
           )}

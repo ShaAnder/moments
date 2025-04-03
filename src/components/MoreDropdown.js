@@ -29,7 +29,7 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   return (
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
-      <Dropdown.Menu className="text-center">
+      <Dropdown.Menu className={css.DropdownMenu}>
         <Dropdown.Item
           className={css.DropdownItem}
           onClick={handleEdit}
