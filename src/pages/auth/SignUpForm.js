@@ -21,8 +21,11 @@ import {
   Alert,
 } from "react-bootstrap";
 
+import { useRedirect } from "../../hooks/useRedirect";
+
 // SignUp Form Component
 const SignUpForm = () => {
+  useRedirect("loggedIn");
   // Get our user registration state
   const [signUpData, setSignUpData] = useState({
     username: "",

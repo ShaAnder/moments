@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/currentUserContexts";
+import { useRedirect } from "../../hooks/useRedirect";
 
 // Media / CSS
 import css from "../../css/SignInUpForm.module.css";
@@ -26,6 +27,7 @@ import {
 function SignInForm() {
   // get our user context at the top of the component
   const setCurrentUser = useSetCurrentUser();
+  useRedirect("loggedIn");
 
   // get our user being signed in state here
   const [signInData, setSignInData] = useState({
@@ -51,7 +53,7 @@ function SignInForm() {
       // we save the data from the api and set it as current user
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-      navigate("/");
+      navigate.goBack("/");
     } catch (err) {
       setErrors(err.response?.data);
     } finally {
