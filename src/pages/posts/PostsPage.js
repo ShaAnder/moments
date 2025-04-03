@@ -22,6 +22,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 // utils
 import { fetchMoreData } from "../../utils/utils";
+import PopularProfiles from "../profiles/popularProfiles";
 
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
@@ -42,7 +43,7 @@ function PostsPage({ message, filter = "" }) {
     setHasLoaded(false);
     const timer = setTimeout(() => {
       fetchPosts();
-    }, 1500);
+    }, 1000);
     return () => {
       clearTimeout(timer);
     };
@@ -51,7 +52,7 @@ function PostsPage({ message, filter = "" }) {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles mobile</p>
+        <PopularProfiles mobile />
         <Icon name="search" className={css.SearchIcon} />
         <Form className={css.SearchBar} onSubmit={(e) => e.preventDefault()}>
           <Form.Control
@@ -87,7 +88,7 @@ function PostsPage({ message, filter = "" }) {
         )}
       </Col>
       <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <p>Popular profiles for desktop</p>
+        <PopularProfiles />
       </Col>
     </Row>
   );

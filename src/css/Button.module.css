@@ -1,69 +1,69 @@
 .Button {
-    font-size: 0.8rem;
-    align-self: center;
-    border-radius: 100px;
-    border-color: transparent;
-    padding: 4px 10px;
-    margin-left: 2px;
-    margin-right: 2px;
-    min-width: 75px;
+  font-size: 0.8rem !important;
+  align-self: center !important;
+  border-radius: 100px !important;
+  border-color: transparent !important;
+  padding: 4px 10px !important;
+  margin-left: 2px !important;
+  margin-right: 2px !important;
+  min-width: 75px !important;
 }
 
 .Button:hover {
-    opacity: 0.8;
-    border-color: transparent;
-    cursor: pointer;
+  opacity: 0.8 !important;
+  border-color: transparent !important;
+  cursor: pointer !important;
 }
 
 .Button:hover:active {
-    background-color: #2142b2 !important;
+  background-color: #2142b2 !important;
 }
 
 .Button:active {
-    background-color: #2142b2 !important;
+  background-color: #2142b2 !important;
 }
 
 .Button:focus {
-    background-color: #2142b2;
+  background-color: #2142b2 !important;
 }
 
 .Wide {
-    padding: 10px 50px;
-    width: 100%;
+  padding: 10px 50px !important;
+  width: 100% !important;
 }
 
 .Blue,
 .BlueOutline:hover,
 .Bright:hover {
-    background-color: #2142b2;
-    color: #ffffff;
+  background-color: #2142b2 !important;
+  color: #ffffff !important;
 }
 
 .BlueOutline,
 .Blue:hover {
-    /* border: 1px solid #2142b2; */
-    background-color: #ffffff;
-    color: #2142b2;
+  /* border: 1px solid #2142b2; */
+  background-color: #ffffff !important;
+  color: #2142b2 !important;
 }
 
 .Black,
 .BlackOutline:hover {
-    /* background-color: #242a3d;
+  /* background-color: #242a3d!important;
     color: white; */
-    background-color: #242a3d;
-    color: aliceblue;
+  background-color: #242a3d !important;
+  color: aliceblue !important;
 }
 
 .Black:hover,
 .BlackOutline {
-    /* background-color: #dadadf;
-    color: #242a3d;
-    border-color: #242a3d; */
-    background-color: aliceblue;
-    color: #242a3d;
+  /* background-color: #dadadf!important;
+    color: #242a3d!important;
+    border-color: #242a3d!important; */
+  background-color: aliceblue !important;
+  color: #242a3d !important;
 }
 
 .Bright {
-    background-color: #2ed9ff;
-    color: #2142b2;
+  background-color: #2ed9ff !important;
+  color: #2142b2 !important;
 }

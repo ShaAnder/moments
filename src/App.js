@@ -15,6 +15,11 @@ import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/currentUserContexts";
 import PostEditForm from "./pages/posts/PostEditForm";
+import ProfilePage from "./pages/profiles/profilePage";
+
+import UsernameForm from "./pages/profiles/usernameForm";
+import UserPasswordForm from "./pages/profiles/passwordForm";
+import ProfileEditForm from "./pages/profiles/profileEditForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -52,9 +57,19 @@ function App() {
           <Route path="/signin" element={<SignInForm />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/posts/create" element={<PostCreateForm />} />
-          <Route path="/posts/:id?" element={<PostPage />}></Route>
+          <Route path="/posts/:id?" element={<PostPage />} />
           <Route path="/posts/:id/edit" element={<PostEditForm />} />
+          <Route path="profiles/:id" element={<ProfilePage />} />
           {/* Catch page not found */}
+          <Route
+            path="/profiles/:id/edit/username"
+            element={<UsernameForm />}
+          />
+          <Route
+            path="/profiles/:id/edit/password"
+            element={<UserPasswordForm />}
+          />
+          <Route path="/profiles/:id/edit" element={<ProfileEditForm />} />
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>
       </Container>
